@@ -1,0 +1,72 @@
+name: Build desktop helper
+on:
+  push:
+    tags: ['helper-v*']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  mac:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@1.92.0
+        with:
+          targets: aarch64-apple-darwin,x86_64-apple-darwin
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: helper
+      - run: cargo test --locked
+        working-directory: helper
+      - run: python3 scripts/notices.py
+        working-directory: helper
+      - run: bash scripts/package-macos.sh
+        working-directory: helper
+      - uses: actions/upload-artifact@v4
+        with:
+          name: helper-mac
+          path: |
+            helper/dist/Spoofed-Helper-macOS.zip
+            helper/resources/THIRD_PARTY_NOTICES.txt
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@1.92.0
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: helper
+      - run: cargo test --locked
+        working-directory: helper
+      - run: cargo build --release --locked
+        working-directory: helper
+      - run: Copy-Item helper/target/release/spoofed-helper.exe Spoofed-Helper-Windows.exe
+      - uses: actions/upload-artifact@v4
+        with:
+          name: helper-windows
+          path: Spoofed-Helper-Windows.exe
+  release:
+    if: startsWith(github.ref, 'refs/tags/helper-v')
+    needs: [mac, windows]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: helper-*
+          merge-multiple: true
+          path: downloads
+      - name: Gather release files
+        run: |
+          mkdir release
+          find downloads -type f \( -name '*.zip' -o -name '*.exe' -o -name 'THIRD_PARTY_NOTICES.txt' \) -exec cp {} release/ \;
+          test -s release/Spoofed-Helper-macOS.zip
+          test -s release/Spoofed-Helper-Windows.exe
+          cd release
+          sha256sum *.zip *.exe > SHA256SUMS.txt
+      - name: Publish downloads
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" release/* --verify-tag --title "Spoofed Helper ${GITHUB_REF_NAME#helper-v} (Preview)" --notes-file helper/RELEASE_NOTES.md

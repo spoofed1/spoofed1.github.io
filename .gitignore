@@ -2,3 +2,6 @@ engine/target/
 .DS_Store
 *.plist
 *.mobiledevicepairing
+helper/target/
+helper/dist/
+!helper/resources/Info.plist
