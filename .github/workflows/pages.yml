@@ -18,10 +18,18 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node --test tests/*.test.js
+      - name: Prepare download page
+        run: |
+          mkdir public
+          cp site/index.html site/style.css site/app.js site/platform.js site/THIRD_PARTY_NOTICES.md public/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: site
+          path: public
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
