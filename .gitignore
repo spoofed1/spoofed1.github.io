@@ -1,0 +1,4 @@
+engine/target/
+.DS_Store
+*.plist
+*.mobiledevicepairing

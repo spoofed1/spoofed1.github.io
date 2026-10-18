@@ -1,0 +1,17 @@
+[package]
+name = "spoofed-web"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+idevice = { git = "https://github.com/jkcoxson/idevice", rev = "3854a5df4a5a6dee71ffce4d8befc2ea356a8065", default-features = false, features = ["wasm", "pair", "remote_pairing", "house_arrest"] }
+wasm-bindgen = "=0.2.114"
+wasm-bindgen-futures = "0.4"
+js-sys = "0.3"
+send_wrapper = { version = "0.6", features = ["futures"] }
+tokio = { version = "1", features = ["io-util"] }
+uuid = { version = "1", features = ["v4", "js"] }
+plist = "1"

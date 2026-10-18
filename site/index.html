@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Pair your iPhone with Spoofed, directly over USB. No account, no cloud upload.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; connect-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Spoofed — Connect your iPhone</title><link rel="stylesheet" href="style.css"><script type="module" src="app.js"></script>
+</head>
+<body>
+<header><a class="brand" href="./"><span class="mark">↗</span> Spoofed</a><span class="badge">iPhone setup · Preview</span></header>
+<main>
+<section class="intro"><p class="eyebrow">ONE CONNECTION. READY TO GO.</p><h1>Your next stop<br>starts here.</h1><p class="lede">Pair your iPhone with Spoofed over USB.<br>No account. No helper app. No files to move.</p><div class="privacy"><span aria-hidden="true">◈</span> Your pairing stays between this browser and your iPhone.</div></section>
+<section class="card" aria-labelledby="setup-title"><div class="card-top"><span class="device-icon" aria-hidden="true">↗</span><div><p class="eyebrow">LET’S GET CONNECTED</p><h2 id="setup-title">Set up Spoofed</h2></div></div>
+<ol class="steps"><li><span>1</span><div><strong>Open Spoofed on your iPhone</strong><p>Go to Settings → Receive from Computer. Keep that screen open and your phone unlocked.</p></div></li><li><span>2</span><div><strong>Connect with a USB cable</strong><p>Use Chrome or Edge on your computer. Close other apps that are using the phone.</p></div></li><li><span>3</span><div><strong>Connect and approve Trust</strong><p>Choose your iPhone when asked. We’ll create the pairing and send it straight into Spoofed.</p></div></li></ol>
+<div class="status" role="status" aria-live="polite"><span id="status-dot"></span><p id="status">Checking this browser…</p></div>
+<button id="connect" disabled>Connect iPhone <span aria-hidden="true">↗</span></button><button id="cancel" class="secondary" hidden>Disconnect</button>
+<p class="footnote">First-time setup needs USB on iOS 26. After setup, use Spoofed with LocalDevVPN on your phone.</p>
+</section>
+<section class="details"><h2>A little help, if you need it.</h2><details><summary>Which computers work?</summary><p>Use a current desktop Chrome or Edge browser with WebUSB support. Safari and iPhone browsers cannot run this setup. USB access varies by operating system and driver. If another app or driver owns the phone’s USB interface, the browser may be unable to connect.</p></details><details><summary>Does anything get uploaded?</summary><p>No pairing file, device identifier, or location is sent to a server. Pairing and USB transfer run in this browser. This page uses no analytics, accounts, or credential storage. GitHub hosts the website files.</p></details><details><summary>The phone isn’t connecting</summary><p>Unlock it, check the cable, close Xcode and other device tools, then disconnect and reconnect. Approve Trust if asked. On Windows or Linux, driver or permission setup may be needed. Don’t change drivers blindly; manual pairing remains available inside Spoofed.</p></details><details><summary>Is this tested on my phone?</summary><p>This setup is a preview. The app and browser engine are built and checked, but physical USB pairing must still be verified on your phone and computer. A transfer message means the file was sent; Spoofed confirms whether it was accepted.</p></details></section>
+</main><footer><span>Spoofed · Setup stays local.</span><a href="THIRD_PARTY_NOTICES.md">Open-source notices</a></footer>
+</body></html>
