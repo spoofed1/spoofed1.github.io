@@ -80,7 +80,7 @@ async fn read_small(afc: &mut AfcClient, path: &str) -> Result<Vec<u8>, String> 
     let mut file = afc
         .open(path, AfcFopenMode::RdOnly)
         .await
-        .map_err(|_| "Open Spoofed → Setup → Receive from Computer, then try again.")?;
+        .map_err(|_| "Open Spoofed > Setup > Receive from Computer, then try again.")?;
     let result = file.read_n(protocol::LIMIT + 1).await.map_err(device_error);
     let closed = file.close().await.map_err(device_error);
     let bytes = result?;
@@ -132,7 +132,7 @@ pub async fn setup(phone: Phone, stage: impl Fn(&str) + Send) -> Result<Outcome,
         service(&provider, &mut lock, "com.apple.mobile.house_arrest", &pair).await?,
     );
     let mut afc = house.vend_documents(protocol::APP_ID).await
-        .map_err(|_| "Install the latest Spoofed app on this iPhone, open Setup → Receive from Computer, then try again.")?;
+        .map_err(|_| "Install the latest Spoofed app on this iPhone, open Setup > Receive from Computer, then try again.")?;
     let nonce = protocol::request_nonce(&read_small(&mut afc, protocol::REQUEST).await?)?;
     stage("Creating your pairing. Keep your iPhone unlocked…");
     lock.set_value(
@@ -147,7 +147,7 @@ pub async fn setup(phone: Phone, stage: impl Fn(&str) + Send) -> Result<Outcome,
     // Reconnect with the same credentials to validate and commit device-side trust.
     for _ in 0..2 {
         RemotePairingLockdownService::new(service(&provider, &mut lock, "com.apple.dt.remotepairingdeviced.lockdown", &pair).await
-            .map_err(|_| "Couldn't open developer pairing. Enable Developer Mode in iPhone Settings → Privacy & Security, complete its restart, and try again.")?)
+            .map_err(|_| "Couldn't open developer pairing. Enable Developer Mode in iPhone Settings > Privacy & Security, complete its restart, and try again.")?)
             .into_client(&hostname).map_err(device_error)?
             .connect(&mut rp, async || "000000".to_string()).await.map_err(device_error)?;
     }

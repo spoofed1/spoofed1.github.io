@@ -12,4 +12,4 @@ This is a preview. Automated build/protocol checks are included; physical iPhone
 
 The iPhone app must already be installed with the Receive from Computer feature. The latest app also confirms acceptance back to the helper. Older compatible receivers show delivery only; check confirmation on the phone. No account or uploads. The computer retains its normal Apple trust record; remote pairing is transferred without saving a separate desktop copy.
 
-`THIRD_PARTY_NOTICES.txt` includes dependency licenses. Source and pinned dependencies are included in this repository.
+`THIRD_PARTY_NOTICES-macOS.txt` and `THIRD_PARTY_NOTICES-Windows.txt` includes dependency licenses. Source and pinned dependencies are included in this repository.

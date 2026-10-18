@@ -1,12 +1,12 @@
 [package]
 name = "spoofed-helper"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 rust-version = "1.92"
 publish = false
 
 [dependencies]
-eframe = { version = "=0.33.3", default-features = false, features = ["default_fonts", "glow", "x11", "wayland"] }
+eframe = { version = "=0.33.3", default-features = false, features = ["default_fonts", "accesskit", "glow", "x11", "wayland"] }
 idevice = { git = "https://github.com/jkcoxson/idevice", rev = "3854a5df4a5a6dee71ffce4d8befc2ea356a8065", default-features = false, features = ["ring", "usbmuxd", "pair", "remote_pairing", "house_arrest"] }
 tokio = { version = "1", features = ["rt-multi-thread", "net", "sync", "time", "macros"] }
 serde = { version = "1", features = ["derive"] }

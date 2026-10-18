@@ -57,7 +57,7 @@ impl Helper {
             scan_error: None,
             task: None,
             generation: 0,
-            message: "Connect your iPhone to get started.".into(),
+            message: "Keep Receive from Computer open in Spoofed.".into(),
             success: false,
             error: false,
         }
@@ -165,7 +165,7 @@ impl eframe::App for Helper {
                 egui::Frame::new().fill(egui::Color32::WHITE).corner_radius(16).inner_margin(22).show(ui, |ui| {
                     ui.set_width(ui.available_width());
                     ui.label(egui::RichText::new("1   Open Spoofed on your iPhone").strong());
-                    ui.label("Go to Setup → Receive from Computer. Keep that screen open.");
+                    ui.label("Go to Setup > Receive from Computer. Keep that screen open.");
                     ui.add_space(3.0);
                     ui.label(egui::RichText::new("2   Plug in and unlock your iPhone").strong());
                     ui.label("Use a USB data cable. Tap Trust and enter your passcode if asked.");

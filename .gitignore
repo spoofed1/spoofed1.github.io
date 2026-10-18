@@ -5,3 +5,4 @@ engine/target/
 helper/target/
 helper/dist/
 !helper/resources/Info.plist
+helper/resources/THIRD_PARTY_NOTICES.txt

@@ -19,7 +19,7 @@ pub fn request_nonce(bytes: &[u8]) -> Result<String, String> {
         return Err("The setup request is too large. Restart receiving in Spoofed.".into());
     }
     let request: Request = serde_json::from_slice(bytes)
-        .map_err(|_| "Open Spoofed → Setup → Receive from Computer, then try again.")?;
+        .map_err(|_| "Open Spoofed > Setup > Receive from Computer, then try again.")?;
     if request.version != 1 || uuid::Uuid::parse_str(&request.nonce).is_err() {
         return Err("Update Spoofed and restart Receive from Computer.".into());
     }

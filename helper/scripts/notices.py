@@ -4,8 +4,9 @@ import pathlib
 import subprocess
 
 root = pathlib.Path(__file__).resolve().parents[1]
+host = next(line.split(': ', 1)[1] for line in subprocess.check_output(['rustc', '-vV'], text=True).splitlines() if line.startswith('host: '))
 metadata = json.loads(subprocess.check_output([
-    'cargo', 'metadata', '--locked', '--format-version', '1',
+    'cargo', 'metadata', '--locked', '--format-version', '1', '--filter-platform', host,
     '--manifest-path', str(root / 'Cargo.toml'),
 ]))
 parts = ['Spoofed Helper — third-party notices\n\nBuilt with idevice and egui/eframe.\n']
